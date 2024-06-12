@@ -10,6 +10,7 @@ import {
 import { Button } from '@/app/ui/button';
 import { createInvoice } from '@/app/lib/actions';
 import  {useFormState} from "react-dom"
+import { error } from 'console';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState={message:null,errors:{}}
@@ -46,7 +47,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
         <div id="customer-error" aria-live="polite" aria-atomic="true">
           {state.errors?.customerId &&
               state.errors.customerId.map((error: string) => (
-                  <label htmlFor="customer" className="mt-2 text-sm text-red-500" key={error}>
+                  <label   htmlFor="customer" className="mt-2 text-sm text-red-500" key={error}>
                     {error}
                   </label>
 
@@ -75,7 +76,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
         </div>
           <div id="amount-error" aria-live="polite"  aria-atomic="true">
             {state.errors?.amount && state.errors.amount.map(amountError =>{
-              return(<label htmlFor= "amount" className="mt-2 text-sm text-red-500">{amountError}</label>)
+              return(<label key={amountError} htmlFor= "amount" className="mt-2 text-sm text-red-500">{amountError}</label>)
             })}
           </div>
         {/* Invoice Status */}
@@ -121,7 +122,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
           </div>
           <div id="status-error" aria-live="polite"  aria-atomic="true">
             {state.errors?.status && state.errors.status.map(statusError=>{
-               return (<label className="mt-2 text-sm text-red-500">{statusError}</label>)
+               return (<label key={statusError} className="mt-2 text-sm text-red-500">{statusError}</label>)
             })}
           </div>
 

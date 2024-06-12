@@ -9,19 +9,19 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
-import {updateInvoice} from "@/app/lib/actions";
-import {useFormState} from "react-dom";
+import { updateInvoice } from '@/app/lib/actions';
+import { useFormState } from 'react-dom';
 
 export default function EditInvoiceForm({
-        invoice,
-        customers,
-       }: {
+  invoice,
+  customers,
+}: {
   invoice: InvoiceForm;
   customers: CustomerField[];
 }) {
   const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
-  const initialState={message:null,errors:{}}
-  const [state,dispatch]=useFormState(updateInvoiceWithId ,initialState)
+  const initialState = { message: null, errors: {} };
+  const [state, dispatch] = useFormState(updateInvoiceWithId, initialState);
   return (
     <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -45,19 +45,21 @@ export default function EditInvoiceForm({
                   {customer.name}
                 </option>
               ))}
-
             </select>
             <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
         </div>
         <div id="customer-error" aria-live="polite" aria-atomic="true">
-          {state.errors?.customerId &&
-              state.errors.customerId.map((error: string) => (
-                  <label htmlFor="customer" className="mt-2 text-sm text-red-500" key={error}>
-                    {error}
-                  </label>
-
-              ))}
+          {state?.errors?.customerId &&
+            state.errors.customerId.map((error: string) => (
+              <label
+                key={error}
+                htmlFor="customer"
+                className="mt-2 text-sm text-red-500"
+              >
+                {error}
+              </label>
+            ))}
         </div>
         {/* Invoice Amount */}
         <div className="mb-4">
@@ -78,13 +80,20 @@ export default function EditInvoiceForm({
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
-          <div>
-
-          </div>
+          <div></div>
         </div>
-        {state.errors?.amount && state.errors.amount.map(amountError =>{
-          return(<label htmlFor= "amount" className="mt-2 text-sm text-red-500">{amountError}</label>)
-        })}
+        {state?.errors?.amount &&
+          state.errors.amount.map((amountError) => {
+            return (
+              <label
+                key={amountError}
+                htmlFor="amount"
+                className="mt-2 text-sm text-red-500"
+              >
+                {amountError}
+              </label>
+            );
+          })}
         {/* Invoice Status */}
         <fieldset>
           <legend className="mb-2 block text-sm font-medium">
@@ -124,14 +133,18 @@ export default function EditInvoiceForm({
                   Paid <CheckIcon className="h-4 w-4" />
                 </label>
               </div>
-
             </div>
           </div>
         </fieldset>
-        <div id="status-error" aria-live="polite"  aria-atomic="true">
-          {state.errors?.status && state.errors.status.map(statusError=>{
-            return (<label className="mt-2 text-sm text-red-500">{statusError}</label>)
-          })}
+        <div id="status-error" aria-live="polite" aria-atomic="true">
+          {state.errors?.status &&
+            state.errors.status.map((statusError) => {
+              return (
+                <label key={statusError} className="mt-2 text-sm text-red-500">
+                  {statusError}
+                </label>
+              );
+            })}
         </div>
       </div>
       <div className="mt-6 flex justify-end gap-4">
